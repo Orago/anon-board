@@ -1,0 +1,34 @@
+{
+  "options": {
+    "passcode": "mittenz51",
+    "Anon Board created by Orago": "Check the .env file for an idea of what these options do.",
+    "env_overide": true,
+    "owner": "Orago",
+    "community_type": "board",
+    "support": {
+      "text": "Support Link",
+      "link": "https://discord.gg/zzthRpu"
+    },
+    "homepage": {
+      "text": "Visit my website",
+      "link": "https://orago.tk"
+    },
+    "names": "true",
+    "default": "general",
+    "creator": "Orago"
+  },
+  "board": {
+    "general": [
+      {
+        "name": "anon",
+        "text": "Welcome to this Anonymous website."
+      },
+      {
+        "name": "anon",
+        "text": "Hows it goin?"
+      }
+    ],
+    "cat": []
+  },
+  "do not delete the creator tag below if you respect my work": "thank you!"
+}
