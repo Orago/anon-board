@@ -1,0 +1,42 @@
+<html>
+<link rel="stylesheet" href="/style.css"><script src="/tools.js" defer></script><div id="assets"></div>
+<form method="post" action="/new-post">
+<h1>New Post</h1>
+<input name="<%- type %>" type="text" placeholder="<%- type %>"><input name="body" type="text" placeholder="Text"><input name="passcode" type="text" id="passcode-0" value="hi" placeholder="Password"><button type="submit">Submit</button>
+</form>
+
+<hr>
+
+<form method="post" action="/settings">
+<h1>Delete Post</h1>
+<input type="hidden" name="setting" value="delete-post"><input name="<%- type %>" type="text" placeholder="<%- type %>"><input type="number" name="id" placeholder="Post number" style="width:200px;" required><input name="passcode" type="text" id="passcode-1" value="hi" placeholder="Password"><button type="submit">Submit</button>
+</form>
+
+<hr>
+
+<form method="post" action="/settings">
+<h1>Reset <%- type %></h1>
+<input type="hidden" name="setting" value="reset-<%- type %>"><input name="<%- type %>" type="text" placeholder="<%- type %>"><input name="passcode" type="text" id="passcode-2" value="hi" placeholder="Password"><button type="submit">Submit</button>
+</form>
+
+<hr>
+
+<form method="post" action="/settings">
+<h1>Delete <%- type %></h1>
+<input type="hidden" name="setting" value="delete-<%- type %>"><input name="<%- type %>" type="text" placeholder="<%- type %>"><input name="passcode" type="text" id="passcode-3" value="hi" placeholder="Password"><button type="submit">Submit</button>
+</form>
+  
+</html>
+
+
+
+
+
+<script>
+var input = prompt("What is the passcode.");
+var i = 0;
+while(i<4){
+var password = document.getElementById(`passcode-${i}`).value = input;
+i++
+}
+</script>
