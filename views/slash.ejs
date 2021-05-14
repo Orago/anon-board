@@ -1,44 +1,84 @@
-<link rel="stylesheet" href="/style.css"><script src="/tools.js" defer></script><div id="assets"></div>
+<link rel="stylesheet" href="/style.css">
+<script src="/tools.js" defer></script>
+<script src="https://meown.glitch.me/tools/functionpack.js"></script>
+<div id="assets"></div>
     
-    <title><%- options.owner %>' Anon <%- communityType %></title>
-    <h2>Welcome to <%- options.owner %>'s Anon <%- communityType %></h2>
+    <title><%- values.title %></title>
+    <h2>Welcome to <%- values.title %></h2>
     <br>
-    <form method="get" action="/<%- communityType %>">
-          <input name="search" type="text" maxlength="100" required placeholder="Find <%- communityType %>">
-        <button type="submit">Search</button>
+    <form method="get" action="/" id="findForm">
+      <input name="search" type="text" maxlength="100" placeholder="Find Group" required>
+      <button type="submit">Search</button>
     </form>
-    <form method="post" action="/new-<%- communityType %>">
-          <input name="<%- communityType %>" type="text" maxlength="100" required placeholder="Create A <%- communityType %>">
-        <button type="submit">Create!</button>
+    <form method="post" action="/" id="createForm">
+      <input name="board" type="text" maxlength="100" placeholder="Create A Group" required>
+      <button type="submit">Create!</button>
     </form>
   <hr>
-    Links:
-    <a href="/<%- options.homepage.link %>"><%- options.homepage.text %></a> |
-    <a href="/<%- options.support.link %>"><%- options.support.text %></a> |
-    <a href="/<%- communityType %>?search=<%- options.default %>">Check the <%- options.default %> <%- communityType %></a>
+    <span id="links">
+
+    </span>
   <hr>
-    <div id="<%- communityType %>s">
-      Current <%- communityType %>'s: 
+    <div>
+      <span id="groupsBefore">Current Groups</span>: <span id="groups"></span>
 </div>
   <hr>
 
 
 <script>
-var <%- communityType %>list = document.getElementById("<%- communityType %>s");
-var <%- communityType%>s = Object.keys(<%- boards %>);
-var i;for (i = 0; i < <%- communityType%>s.length; i++) {
-  <%- communityType%>_list(<%- communityType%>s[i])
-}
+
+  async function Api(input){
+    var o=o||"";
+    var r = await fetch(`/api/${input}`).then(l => l.json()).then(l => l.response)
+    return r;
+  }
   
-function <%- communityType%>_list(<%- communityType%>) {
-  const new<%- communityType %>Item = document.createElement("a");
-  var newdivider = document.createElement("a");
-  new<%- communityType %>Item.href = `/<%- communityType %>?search=${<%- communityType%>}`
-  new<%- communityType %>Item.innerText = (<%- communityType%>).charAt(0).toUpperCase() + (<%- communityType%>).slice(1);;
-  <%- communityType %>list.appendChild(new<%- communityType %>Item);
-  if (<%- communityType%>s.length > 0){
-  newdivider.innerText = " | "
-  <%- communityType %>list.appendChild(newdivider);
+window.addEventListener("load", async function() {
+  window.groupType = await Api(`options`).then((res)=>{return res.communityType;});
+  window.groupListObject = document.getElementById(`groups`);
+  window.groupList = await Api(`boards/boardList`).then((res)=>{return res;});
+  groupList.forEach(addBoardToList);
+  loadForms();
+  loadLinks();
+});
+  
+async function addBoardToList(item,index){
+  var newGroupItem = document.createElement("a"),
+      newdivider = document.createElement("a");
+  newGroupItem.href = `/${groupType}?search=${item}`;
+  newGroupItem.innerText = item.charAt(0).toUpperCase() + item.slice(1);
+  groupListObject.appendChild(newGroupItem);
+  if (groupList.length-index > 0){
+    newdivider.innerText = " | ";
+    groupListObject.appendChild(newdivider);
   }
 }
+async function loadForms(){
+  var findForm = document.getElementById("findForm");
+  findForm.setAttribute("action",`/${groupType}`)
+  findForm.children[0].setAttribute("placeholder",`Find ${caps(groupType)}`);
+  
+  var createForm = document.getElementById("createForm");
+  createForm.setAttribute("action",`/new-${groupType}`)
+  createForm.children[0].setAttribute("placeholder",`Create A ${caps(groupType)}`);
+  createForm.children[0].setAttribute("name",groupType);
+}
+
+async function loadLinks(){
+  var links = document.getElementById("links");
+   await Api(`options`).then((options)=>{
+     document.getElementById("groupsBefore").innerHTML = `Current ${options.communityType}s`;
+     links.innerHTML = `
+      Links:
+      <a href="/${ options.homepage.link }">${ options.homepage.text }</a> |
+      <a href="/${ options.support.link }">${ options.support.text }</a> |
+      <a href="/${groupType}?search=${ options.default }">Check the ${ options.default } ${groupType}</a>
+     `;
+   });
+  
+
+}
+  
+  
+  
 </script>

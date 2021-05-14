@@ -2,9 +2,10 @@
   "options": {
     "passcode": "mittenz51",
     "Anon Board created by Orago": "Check the .env file for an idea of what these options do.",
-    "env_overide": true,
+    "envOveride": true,
     "owner": "Orago",
-    "community_type": "board",
+    "communityType": "board",
+    "communityTypePlural": "boards",
     "support": {
       "text": "Support Link",
       "link": "https://discord.gg/zzthRpu"
@@ -26,9 +27,30 @@
       {
         "name": "anon",
         "text": "Hows it goin?"
+      },
+      {
+        "name": "anon",
+        "text": "heyy"
+      },
+      {
+        "name": "anon",
+        "text": "hmm"
+      },
+      {
+        "name": "anon",
+        "text": "hey!"
+      },
+      {
+        "name": "anon",
+        "text": "hello!"
+      },
+      {
+        "name": "anon",
+        "text": "why me??"
       }
     ],
-    "cat": []
+    "cat": [],
+    "testing": []
   },
   "do not delete the creator tag below if you respect my work": "thank you!"
 }

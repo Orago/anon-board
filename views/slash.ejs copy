@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="/style.css"><script src="/tools.js" defer></script><div id="assets"></div>
+    
+    <title><%- options.owner %>' Anon <%- communityType %></title>
+    <h2>Welcome to <%- options.owner %>'s Anon <%- communityType %></h2>
+    <br>
+    <form method="get" action="/<%- communityType %>">
+          <input name="search" type="text" maxlength="100" required placeholder="Find <%- communityType %>">
+        <button type="submit">Search</button>
+    </form>
+    <form method="post" action="/new-<%- communityType %>">
+          <input name="<%- communityType %>" type="text" maxlength="100" required placeholder="Create A <%- communityType %>">
+        <button type="submit">Create!</button>
+    </form>
+  <hr>
+    Links:
+    <a href="/<%- options.homepage.link %>"><%- options.homepage.text %></a> |
+    <a href="/<%- options.support.link %>"><%- options.support.text %></a> |
+    <a href="/<%- communityType %>?search=<%- options.default %>">Check the <%- options.default %> <%- communityType %></a>
+  <hr>
+    <div id="<%- communityType %>s">
+      Current <%- communityType %>'s: 
+</div>
+  <hr>
+
+
+<script>
+
+  async function Api(input){
+    var o=o||"";
+    var r = await fetch(`/api/${input}`).then(l => l.json()).then(l => l.response)
+    return r;
+  }
+window.addEventListener("load", async function() {
+  alert(await Api(`boards/boardList`).then((res)=>{return res;}))
+var <%- communityType %>list = document.getElementById("<%- communityType %>s");
+var <%- communityType%>s = await Api(`boards/boardList`).then((res)=>{return res;});
+var i;for (i = 0; i < <%- communityType%>s.length; i++) {
+  <%- communityType%>_list(<%- communityType%>s[i])
+}
+})
+function <%- communityType%>_list(<%- communityType%>) {
+  const new<%- communityType %>Item = document.createElement("a");
+  var newdivider = document.createElement("a");
+  new<%- communityType %>Item.href = `/<%- communityType %>?search=${<%- communityType%>}`
+  new<%- communityType %>Item.innerText = (<%- communityType%>).charAt(0).toUpperCase() + (<%- communityType%>).slice(1);;
+  <%- communityType %>list.appendChild(new<%- communityType %>Item);
+  if (<%- communityType%>s.length > 0){
+  newdivider.innerText = " | "
+  <%- communityType %>list.appendChild(newdivider);
+  }
+}
+</script>

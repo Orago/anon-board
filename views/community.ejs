@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Something neat made by Orago, Again..">
-    <meta property="og:title" content="<%- options.owner %>'s <%- values.type %>: Anonymous<%- values.communityName%>" />
+    <meta property="og:title" content="<%- values.title %>" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://orago.tk" />
     <meta property="og:image" content="https://cdn.glitch.com/65f81ac1-5972-4a88-a61a-62585d79cfc0%2Fboxie-2048px.png?v=1594354728664" />
@@ -16,19 +16,17 @@
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/png" href="https://cdn.glitch.com/65f81ac1-5972-4a88-a61a-62585d79cfc0%2Fboxie32bfull.png">
     <link id="favicon" rel="icon" href="https://cdn.glitch.com/65f81ac1-5972-4a88-a61a-62585d79cfc0%2Fboxie32bfull.png" type="image/x-icon">
-    <title><%- options.owner %>'s <%- values.type %>: <%- values.communityName%></title><!-- Setting title with custom variables -->
+    <title><%- values.title %></title><!-- Setting title with custom variables -->
 
     <!-- import the webpage's stylesheet -->
     <link rel="stylesheet" href="/style.css">
     <script src="/script.js" defer></script>
-    <script src="/script.js" defer></script>
+    <script src="https://meown.glitch.me/tools/functionpack.js"></script>
   </head>
   <body>
     <header>
-      <h1>Board: <%- values.communityName%></h1><!-- A large text saying the name of current said board -->
+      <h1 id="textTitle"></h1><!-- A large text saying the name of current said board -->
     </header>
-<a id="<%-values.type %>Name" style="display:none;"><%- values.communityName %></a><!-- Gets name type of community to use in "public/script.js" file -->
-<a id="type" style="display:none;"><%- values.type %></a><!-- Gets type of community to use in "public/script.js" file -->
     <main>
       <p>Please note that anyone can see this!</p><!-- A disclaimer that the post you make may be seen by anyone on the board -->
 
@@ -40,7 +38,7 @@
           <!-- A name that can be toggled whether its usable or not. This makes it so people can be non-anonymous (Idk just though that I mine as well add it)-->
           <input name="name" type="text" maxlength="100" id="nameInput" class="name_input" placeholder="Name (Optional)">
           <!-- The name of your community "board" to send the post to -->
-          <input name="<%- values.type %>" type="hidden" value="<%- values.communityName%>">
+          <input id="inputName" name="" type="hidden" value="">
         </label>
         <button type="submit">Add Post</button><!-- Button to upload / create post -->
       </form>
@@ -52,7 +50,7 @@
       </section>
     </main>
   <hr>
-    Made by <a href="https://meown.tk/u?search=orago"><%- options.creator %></a>! | 
+    Made by <a href="https://meown.tk/u?search=orago">Orago</a>! | 
     <a href="/">Back</a>
   </body>
 </html>
