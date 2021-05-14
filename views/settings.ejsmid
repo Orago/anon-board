@@ -7,16 +7,19 @@
 <h1>New Post</h1>
 <input id="group-0" type="text">
 <input id="body" name="body" type="text" placeholder="Text">
-<button onclick="sendPostCreate();">Submit</button>
+<input id="passcode-0" name="passcode" type="text" value="hi" placeholder="Password">
+<button type="submit">Submit</button>
 <script>
   document.getElementById("group").setAttribute("placeholder",type);
+  document.getElementById("group").setAttribute("name",type);
   function sendPostCreate(){
     var details = {
+      setting: 'new',
       id:id,
       [type]:document.getElementById("group-0").value,
-      passcode:prompt("What is the password.")
+      passcode:document.getElementById("passcode-0").value
     }
-    post('/new-post', details).then((e)=>{location.reload();})
+    post('/settings', details).then((e)=>{location.reload();})
   }
 </script>
 
@@ -25,7 +28,8 @@
 
 <h1>Delete Post</h1>
 <input id="group" type="text">
-<input id="id" type="number" placeholder="Post number" style="width:200px;" required>
+<input id="id" type="number"  name="id" placeholder="Post number" style="width:200px;" required>
+<input id="passcode-1" type="text" name="passcode" value="hi" placeholder="Password">
 <button onclick="sendPostDelete();">Submit</button>
 <script>
   document.getElementById("group").setAttribute("placeholder",type);
@@ -35,7 +39,7 @@
       setting: 'delete-post',
       id:id,
       [type]:document.getElementById("group").value,
-      passcode:prompt("What is the password.")
+      passcode:document.getElementById("passcode-1").value
     }
     post('/settings', details).then((e)=>{location.reload();})
   }
@@ -46,42 +50,16 @@
 <hr>
 
 <form method="post" action="/settings">
-<h1 id="reset_group">Reset Group</h1>
-<input id="group" type="text">
-<button onclick="resetGroup();">Submit</button>
-<script>
-  document.getElementById("group").setAttribute("placeholder",type);
-  document.getElementById("delete_group").innerHTML = `Delete ${type}`;
-  function resetGroup(){
-    var details = {
-      setting: `reset-${type}`,
-      id:id,
-      [type]:document.getElementById("group").value,
-      passcode:prompt("What is the password.")
-    }
-    post('/settings', details).then((e)=>{location.reload();})
-  }
-</script>
+<h1>Reset <%- type %></h1>
+<input type="hidden" name="setting" value="reset-<%- type %>"><input name="<%- type %>" type="text" placeholder="<%- type %>"><input name="passcode" type="text" id="passcode-2" value="hi" placeholder="Password"><button type="submit">Submit</button>
 </form>
 
 <hr>
 
-<h1 id="delete_group">Delete Group</h1>
-<input id="group" type="text">
-<button onclick="deleteGroup();">Submit</button>
-<script>
-  document.getElementById("group").setAttribute("placeholder",type);
-  document.getElementById("delete_group").innerHTML = `Delete ${type}`;
-  function deleteGroup(){
-    var details = {
-      setting: `delete-${type}`,
-      id:id,
-      [type]:document.getElementById("group").value,
-      passcode:prompt("What is the password.")
-    }
-    post('/settings', details).then((e)=>{location.reload();})
-  }
-</script>
+<form method="post" action="/settings">
+<h1>Delete <%- type %></h1>
+<input type="hidden" name="setting" value="delete-<%- type %>"><input name="<%- type %>" type="text" placeholder="<%- type %>"><input name="passcode" type="text" id="passcode-3" value="hi" placeholder="Password"><button type="submit">Submit</button>
+</form>
   
 </html>
 
@@ -110,12 +88,11 @@ function post(url, data) {
 }
   
 var type = Api(`options/`).then((res)=>{return res.communityType;});
-  /*
+  
 var input = prompt("What is the passcode.");
 var i = 0;
 while(i<4){
 var password = document.getElementById(`passcode-${i}`).value = input;
 i++
 }
-*/
 </script>
